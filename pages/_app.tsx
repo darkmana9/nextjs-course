@@ -1,12 +1,16 @@
 import React from 'react';
-import { ProvideAuth } from '../lib/auth';
+import { AuthProvider } from '../lib/auth';
+import { ChakraProvider } from ''
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
    return (
-      <ProvideAuth>
+      <ChakraProvider>
+   <AuthProvider>
          <Component {...pageProps} />
-      </ProvideAuth>
+      </AuthProvider>
+      </ChakraProvider>
+   
    );
 }
 

@@ -15,7 +15,6 @@ import {
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useAuth } from '@/lib/auth';
 
-
 const DashboardShell = ({ children }) => {
    const auth = useAuth();
 
@@ -36,14 +35,18 @@ const DashboardShell = ({ children }) => {
                <Link>Sites</Link>
             </Stack>
             <Flex align="center">
-               <Link mr={4}>Account</Link>
-               <Avatar size="sm" src={auth?.user.photoUrl} />
+               {auth.user && (
+                  <Button variant="ghost" onClick={() => auth.signout()} mr={2}>
+                     Sign out
+                  </Button>
+               )}
+               <Avatar size="sm" src={auth?.user?.photoUrl} />
             </Flex>
          </Flex>
          <Flex backgroundColor="gray.100" p={8} height="100%">
             <Flex width="100%" maxWidth="800px" ml="auto" mr="auto">
                <Flex width="100%" flexDirection="column">
-                  <Breadcrumb color='gray.600'>
+                  <Breadcrumb color="gray.600">
                      <BreadcrumbItem isCurrentPage>
                         <BreadcrumbLink>Sites</BreadcrumbLink>
                      </BreadcrumbItem>

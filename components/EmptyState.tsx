@@ -1,9 +1,7 @@
 import React from 'react';
-import { Heading, Box, Text, Button, Flex } from '@chakra-ui/react';
-import DashboardShell from './DashboardShell';
+import { Heading, Text, Flex } from '@chakra-ui/react';
 import { AddSiteModal } from './AddSiteModal';
 const EmptyState = () => (
-   <DashboardShell>
       <Flex
          width="100%"
          backgroundColor="white"
@@ -19,6 +17,5 @@ const EmptyState = () => (
          <Text mb="2">Welcome</Text>
          <AddSiteModal />
       </Flex>
-   </DashboardShell>
 );
 export default EmptyState;

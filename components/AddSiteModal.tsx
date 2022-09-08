@@ -64,7 +64,7 @@ export const AddSiteModal = () => {
                      <FormLabel>Name</FormLabel>
                      <Input
                         placeholder="My site"
-                        {...register('site', { required: true })}
+                        {...register('name', { required: true })}
                      />
                   </FormControl>
                   <FormControl mt={4}>

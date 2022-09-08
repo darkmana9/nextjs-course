@@ -1,13 +1,25 @@
-import { Box, Button, Code, Flex, Heading, Icon, Text } from '@chakra-ui/react';
 import React from 'react';
-import { useAuth } from '@/lib/auth';
-import Head from 'next/head';
 import EmptyState from '@/components/EmptyState';
+import { SiteTableSkeleton } from '@/components/SiteTableSkeleton';
+import DashboardShell from '@/components/DashboardShell';
+import useSWR from 'swr';
+import  fetcher  from '@/utils/fetcher';
+import { SiteTable } from '@/components/SiteTable';
 
 export default function Home() {
-   const auth = useAuth();
-   if (!auth.user) {
-      return 'Loading...';
+   const { data } = useSWR('/api/sites', fetcher);
+   
+   if (!data) {
+      return (
+         <DashboardShell>
+            <SiteTableSkeleton />
+         </DashboardShell>
+      );
    }
-   return <EmptyState />;
+   return (
+      <DashboardShell>
+         {data.sites ? <SiteTable sites={data.sites} />  : <EmptyState />}
+      </DashboardShell>
+   );
+   
 }

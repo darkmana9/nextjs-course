@@ -1,12 +1,10 @@
+import { getAllFeedback } from '@/lib/db-admin';
 import firebaseAdmin from '../../lib/firebase-admin';
-import { getAllSites } from '../../lib/db-admin';
 
 export default async function handler(req, res) {
-   const {sites, error} = await getAllSites();
-
+   const {feedback, error} = await getAllFeedback(req.query.siteId);
    if (error) {
       res.status(500).json({ error });
    }
-
-   res.status(200).json({ sites });
+   res.status(200).json({ feedback });
 }

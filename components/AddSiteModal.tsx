@@ -17,8 +17,9 @@ import {
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@/lib/auth';
+import { mutate } from 'swr';
 
-export const AddSiteModal = () => {
+export const AddSiteModal = ({ children }) => {
    const { isOpen, onOpen, onClose } = useDisclosure();
    const toast = useToast();
    const auth = useAuth();
@@ -30,12 +31,14 @@ export const AddSiteModal = () => {
       formState: { errors }
    } = useForm();
 
-   const addSite = (values) => {
-      createSite({
-         aouthorId: auth.user.uid,
+   const addSite = ({ name, url }) => {
+      const newSite = {
+         authorId: auth.user.uid,
          createdAt: new Date().toISOString(),
-         ...values
-      });
+         name,
+         url
+      };
+      createSite(newSite);
       toast({
          title: 'Succsess!',
          description: 'We`ve added your site.',
@@ -43,6 +46,13 @@ export const AddSiteModal = () => {
          duration: 3000,
          isClosable: true
       });
+      mutate(
+         '/api/sites',
+         async (data) => {
+            return { sites: [...data.sites, newSite] };
+         },
+         false
+      );
       onClose();
    };
 
@@ -50,8 +60,18 @@ export const AddSiteModal = () => {
 
    return (
       <>
-         <Button maxW="200px" variant="solid" size="md" onClick={onOpen}>
-            Add your first site
+         <Button
+            onClick={onOpen}
+            backgroundColor="gray.900"
+            color="white"
+            fontWeight="medium"
+            _hover={{ bg: 'gray.700' }}
+            _active={{
+               bg: 'gray.800',
+               transform: 'scale(0.95)'
+            }}
+         >
+            {children}
          </Button>
 
          <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>

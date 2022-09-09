@@ -14,6 +14,8 @@ import {
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 import { useAuth } from '@/lib/auth';
+import { transform } from 'framer-motion';
+import { AddSiteModal } from './AddSiteModal';
 
 const DashboardShell = ({ children }) => {
    const auth = useAuth();
@@ -51,7 +53,12 @@ const DashboardShell = ({ children }) => {
                         <BreadcrumbLink>Sites</BreadcrumbLink>
                      </BreadcrumbItem>
                   </Breadcrumb>
-                  <Heading mb="20px">Sites</Heading>
+                  <Flex justifyContent="space-between">
+                     <Heading mb="20px">My Sites</Heading>
+                     <AddSiteModal>
+                        + Add site
+                     </AddSiteModal>
+                  </Flex>
                   {children}
                </Flex>
             </Flex>

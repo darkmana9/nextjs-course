@@ -5,9 +5,11 @@ import DashboardShell from '@/components/DashboardShell';
 import useSWR from 'swr';
 import fetcher from '@/utils/fetcher';
 import { SiteTable } from '@/components/SiteTable';
+import { useAuth } from '@/lib/auth';
 
 export default function Home() {
-   const { data } = useSWR('/api/sites', fetcher);
+   const { user } = useAuth()
+   const { data } = useSWR(user ? ['/api/sites', user.token] : null , fetcher);
 
    if (!data) {
       return (

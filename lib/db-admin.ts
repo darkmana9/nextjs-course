@@ -1,11 +1,11 @@
-import firebase from './firebase-admin';
+import { db } from './firebase-admin';
 import { compareDesc, parseISO } from 'date-fns';
 
-export async function getAllFeedback(seteId) {
+export async function getAllFeedback(siteId) {
    try {
-      const snapshot = await firebase
+      const snapshot = await db
          .collection('feedback')
-         .where('siteId', '==', seteId)
+         .where('siteId', '==', siteId)
          .get();
 
       const feedback = [];
@@ -23,16 +23,31 @@ export async function getAllFeedback(seteId) {
 }
 
 export async function getAllSites() {
-   try {
-      const snapshot = await firebase.collection('sites').get();
+
+      const snapshot = await db.collection('sites').get();
 
       const sites = [];
 
       snapshot.forEach((doc) => {
          sites.push({ id: doc.id, ...doc.data() });
       });
+      console.log(sites);
+      
       return { sites };
-   } catch (error) {
-      return { error };
-   }
+   
+}
+
+export async function getUserSites(userId) {
+
+   const snapshot = await db
+      .collection('sites')
+      .where('authorId', '==', userId)
+      .get();
+
+   const sites = [];
+
+   snapshot.forEach((doc) => {
+      sites.push({ id: doc.id, ...doc.data() });
+   });
+   return { sites };
 }

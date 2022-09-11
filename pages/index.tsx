@@ -17,11 +17,15 @@ export default function Home() {
          margin="0 auto"
       >
          <Head>
-            <script dangerouslySetInnerHTML={{
-               __html: `
-            if(document.cookie && document.cookie.includes('authed'){
-               window.location.href = "/dashboard"
-            })`}} />
+            <script
+               dangerouslySetInnerHTML={{
+                  __html: `
+              if (document.cookie && document.cookie.includes('fast-feedback-auth')) {
+                window.location.href = "/dashboard"
+              }
+            `
+               }}
+            />
             <title>Next.js project</title>
          </Head>
          <Flex
@@ -36,13 +40,35 @@ export default function Home() {
                   Sign Out
                </Button>
             ) : (
-               <Button
-                  variant="link"
-                  size="sm"
-                  onClick={() => auth.signInWithGitHub()}
-               >
-                  Sign in
-               </Button>
+               <>
+                  <Button
+                     backgroundColor="gray.900"
+                     color="white"
+                     fontWeight="medium"
+                     _hover={{ bg: 'gray.700' }}
+                     _active={{
+                        bg: 'gray.800',
+                        transform: 'scale(0.95)'
+                     }}
+                     mb={4}
+                     onClick={() => auth.signInWithGitHub()}
+                  >
+                     Sign in with Github
+                  </Button>
+                  <Button
+                     backgroundColor="gray.900"
+                     color="white"
+                     fontWeight="medium"
+                     _hover={{ bg: 'gray.700' }}
+                     _active={{
+                        bg: 'gray.800',
+                        transform: 'scale(0.95)'
+                     }}
+                     onClick={() => auth.signInWithGoogle()}
+                  >
+                     Sign in with Google
+                  </Button>
+               </>
             )}
          </Flex>
       </Flex>

@@ -13,13 +13,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
    return {
       props: {
          initialFeedback: feedback
-      }
+      },
+      revalidate: 1
    };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
    const { sites } = await getAllSites();
-   
+
    const paths = sites.map((site) => ({
       params: {
          siteId: site.id.toString()

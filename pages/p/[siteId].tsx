@@ -35,7 +35,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const SiteFeedback = ({ initialFeedback }) => {
    const auth = useAuth();
    const router = useRouter();
-   const inputEl = useRef(null);
+   const inputEl = useRef<HTMLInputElement>(null);
    const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
    const onSubmit = (e) => {
@@ -45,7 +45,7 @@ const SiteFeedback = ({ initialFeedback }) => {
          author: auth.user.name,
          authorId: auth.user.uid,
          siteId: router.query.siteId,
-         text: inputEl.current.value,
+         text: inputEl.current?.value,
          createAt: new Date().toISOString(),
          proveder: auth.user.provider,
          status: 'pending'

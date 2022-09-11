@@ -15,7 +15,7 @@ import {
    useToast
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useAuth } from '@/lib/auth';
 import { mutate } from 'swr';
 
@@ -31,7 +31,7 @@ export const AddSiteModal = ({ children }) => {
       formState: { errors }
    } = useForm();
 
-   const addSite = ({ name, url }) => {
+   const addSite: SubmitHandler<FieldValues> = ({ name, url }) => {
       const newSite = {
          authorId: auth.user.uid,
          createdAt: new Date().toISOString(),

@@ -18,7 +18,7 @@ import { mutate } from 'swr';
 export const RemoveButton = ({ feedbackId }) => {
    const { isOpen, onOpen, onClose } = useDisclosure();
    const auth = useAuth();
-   const cancelRef = useRef();
+   const cancelRef = useRef<HTMLInputElement | null>(null);
    const onDeleteFeedback = () => {
       deleteFeedback(feedbackId);
       mutate(
@@ -59,7 +59,7 @@ export const RemoveButton = ({ feedbackId }) => {
                   </AlertDialogBody>
 
                   <AlertDialogFooter>
-                     <Button ref={cancelRef} onClick={onClose}>
+                     <Button onClick={onClose}>
                         Cancel
                      </Button>
                      <Button

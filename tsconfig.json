@@ -23,6 +23,6 @@
       "incremental": true,
       "noImplicitAny": false,
    },
-   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/db-admin.js"],
    "exclude": ["node_modules"]
 }

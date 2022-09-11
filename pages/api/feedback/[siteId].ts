@@ -1,5 +1,4 @@
 import { getAllFeedback } from '@/lib/db-admin';
-import {auth} from '../../lib/firebase-admin';
 
 export default async function handler(req, res) {
    const { feedback, error } = await getAllFeedback(req.query.siteId);

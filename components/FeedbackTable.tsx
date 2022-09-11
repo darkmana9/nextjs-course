@@ -2,7 +2,7 @@ import { Box, Code, IconButton, Switch } from '@chakra-ui/react';
 import { Td, Table, Tr, Th } from './Table';
 import React from 'react';
 import { DeleteIcon } from '@chakra-ui/icons';
-import { RemoveButton } from './REmoveButton';
+import { RemoveButton } from './RemoveButton';
 
 export const FeedbackTable = ({ allFeedback }) => {
    return (
